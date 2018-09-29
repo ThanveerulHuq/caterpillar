@@ -5,6 +5,11 @@ const APIError = require('../helpers/APIError');
 
 
 const SurveySchema = new mongoose.Schema({
+
+    _id: {
+        type: String,
+        required: true
+    },
     surveyName: {
         type: String,
         required: true
