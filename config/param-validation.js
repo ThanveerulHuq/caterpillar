@@ -33,5 +33,11 @@ module.exports = {
       surveyName:Joi.string().required(),
       description:Joi.string().required()
     }
+  },
+
+  createQuestions:{
+    body:{
+      
+    }
   }
 };

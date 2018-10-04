@@ -10,12 +10,20 @@ const Survey= require('./survey.model')
  * @returns {Survey}
  */
 function create(req, res, next) {
+    
     console.log('in survey controller');
+    var today = new Date();
+    var dateTime = formatDate(today);
+
+    var tempGenId = req.body.surveyName + req.body.theme +"/"+ dateTime;
+    var genId = tempGenId.replace(/\s/g, "");
+    var genUrl = req.body.surveyName + "/" + req.body.theme;
     const survey = new Survey({
+        _id: genId,
         surveyName: req.body.surveyName,
         description: req.body.description,
         theme: req.body.theme,
-        url: req.body.url
+        url: genUrl
     });
   
     survey.save()
@@ -34,6 +42,17 @@ function list(req, res, next) {
     Survey.list({ limit, skip })
       .then(surveys => res.json(surveys))
       .catch(e => next(e));
+  }
+
+  function formatDate(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
   }
 
   module.exports = { create, list };

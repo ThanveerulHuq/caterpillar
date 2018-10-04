@@ -4,42 +4,43 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 
-const SurveySchema = new mongoose.Schema({
+const QuestionsSchema = new mongoose.Schema({
 
-    _id: {
+   
+    survey: {
         type: String,
         required: true
     },
-    surveyName: {
+    question_no: {
         type: String,
-        required: true
+        required: false,
     },
-    description: {
-        type: String,
-        required: true,
-    },
-    theme: {
+    title: {
         type: String,
         default:'default'
     },
-    url:{
+    type:{
         type: String,
-        default:'/surveyApp'
+        default:'default'
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
+    options: {
+        type: [String],
+        default: 'default'
+    },
+    optional:{
+        type: String,
+        default: 'default'
     }
 });
 
 
-SurveySchema.method({
+QuestionsSchema.method({
 });
 
 /**
  * Statics
  */
-SurveySchema.statics = {
+QuestionsSchema.statics = {
   /**
    * Get user
    * @param {ObjectId} id - The objectId of user.
@@ -48,9 +49,9 @@ SurveySchema.statics = {
   get(id) {
     return this.findById(id)
       .exec()
-      .then((survey) => {
-        if (survey) {
-          return survey;
+      .then((questions) => {
+        if (questions) {
+          return questions;
         }
         const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
@@ -73,6 +74,6 @@ SurveySchema.statics = {
 };
 
 /**
- * @typedef Survey
+ * @typedef questions
  */
-module.exports = mongoose.model('Survey', SurveySchema);
+module.exports = mongoose.model('questions', QuestionsSchema);
