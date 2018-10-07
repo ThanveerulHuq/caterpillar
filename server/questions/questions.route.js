@@ -6,7 +6,7 @@ const questionsCtrl = require('./questions.controller');
 const router = express.Router(); // eslint-disable-line new-cap
 
 
-router.route('/')
+router.route('/addQuestions')
   /** GET /api/users - Get list of users */
   .get(questionsCtrl.list)
 

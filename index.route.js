@@ -20,7 +20,7 @@ router.use('/users', userRoutes);
 router.use('/survey', surveyRoutes);
 
 // mount user routes at /questions
-router.use('/addQuestions', questionsRoutes);
+router.use('/questions', questionsRoutes);
 
 // mount auth routes at /auth
 router.use('/auth', authRoutes);

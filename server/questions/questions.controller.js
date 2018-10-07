@@ -1,4 +1,4 @@
-const questions= require('./questions.model')
+const questions = require('./questions.model')
 
 
 /**
@@ -10,11 +10,6 @@ const questions= require('./questions.model')
  * @returns {questions}
  */
 function create(req, res, next) {
-
-    console.log('in Questions controller');
-
-    console.log((req.body.question).length);
-
     let questionsList = [];
     for (i = 0; i < (req.body.question).length; i++) {
         const question = {
@@ -30,7 +25,7 @@ function create(req, res, next) {
     }
 
     questions.bulkInsert(questionsList)
-        .then(savedQuestions => res.json({message:savedQuestions?'questions updated successfully':'error updating questions'}))
+        .then(savedQuestions => res.json({ message: savedQuestions ? 'questions updated successfully' : 'error updating questions' }))
         .catch(e => next(e));
 }
 
@@ -43,23 +38,14 @@ function create(req, res, next) {
 function list(req, res, next) {
     const { limit = 50, skip = 0 } = req.query;
     questions.list({ limit, skip })
-      .then(questions => res.json(questions))
-      .catch(e => next(e));
-  }
+        .then(questions => res.json(questions))
+        .catch(e => next(e));
+}
 
-  
-  
+function viewOne(req, res, next) {
+    questions.find({ survey: req.params.id }, questions)
+        .then(questions => res.json(questions))
+        .catch(e => next(e));
+}
 
-// // find all athletes who play tennis, selecting the 'name' and 'age' fields
-// viewOne({ 'survey': 'jpi' }, function (err, questions) {
-//   if (err) return handleError(err);
-//   // 'athletes' contains the list of athletes that match the criteria.
-// })
-
-  module.exports = { create, list , viewOne: function(req, res,next){
-    console.log('Viewing ' + req.params.id);
-    questions.find({survey: req.params.id}, questions)
-    .then(questions => res.json(questions))
-    .catch(e => next(e));
-    
-}};
+module.exports = { create, list, viewOne };
