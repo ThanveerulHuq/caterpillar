@@ -3,6 +3,7 @@ const userRoutes = require('./server/user/user.route');
 const authRoutes = require('./server/auth/auth.route');
 const surveyRoutes = require('./server/survey/survey.route');
 const questionsRoutes = require('./server/questions/questions.route');
+const responseRoutes = require('./server/response/response.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -21,6 +22,9 @@ router.use('/survey', surveyRoutes);
 
 // mount user routes at /questions
 router.use('/questions', questionsRoutes);
+
+// mount user routes at /response
+router.use('/response', responseRoutes);
 
 // mount auth routes at /auth
 router.use('/auth', authRoutes);
