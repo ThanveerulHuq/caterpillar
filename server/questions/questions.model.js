@@ -70,6 +70,11 @@ QuestionsSchema.statics = {
       .skip(+skip)
       .limit(+limit)
       .exec();
+  },
+
+
+  bulkInsert(data){
+      return this.insertMany(data);
   }
 };
 

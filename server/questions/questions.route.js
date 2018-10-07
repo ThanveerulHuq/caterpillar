@@ -5,11 +5,18 @@ const questionsCtrl = require('./questions.controller');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
+
 router.route('/')
   /** GET /api/users - Get list of users */
   .get(questionsCtrl.list)
 
   /** POST /api/users - Create new user */
   .post(validate(paramValidation.createQuestions), questionsCtrl.create);
+
+  module.exports = router;
+
+  router.route('/findQuestion/:id')
+  /** GET /api/users - Get list of users */
+  .get(questionsCtrl.viewOne)
 
   module.exports = router;
