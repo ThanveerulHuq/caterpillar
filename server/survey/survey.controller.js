@@ -15,9 +15,9 @@ function create(req, res, next) {
     var today = new Date();
     var dateTime = formatDate(today);
 
-    var tempGenId = req.body.surveyName + req.body.theme +"/"+ dateTime;
+    var tempGenId = req.body.surveyName + req.body.theme + dateTime;
     var genId = tempGenId.replace(/\s/g, "");
-    var genUrl = req.body.surveyName + "/" + req.body.theme;
+    var genUrl = req.body.surveyName + "/" + req.body.theme +"/"+genId;
     const survey = new Survey({
         _id: genId,
         surveyName: req.body.surveyName,

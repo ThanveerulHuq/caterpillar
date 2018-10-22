@@ -11,17 +11,9 @@ const ResponseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    question: {
-        type: String,
+    answer: {
+        type: [String],
         required: false,
-    },
-    response: {
-        type: String,
-        default:'default'
-    },
-    skipped:{
-        type: String,
-        default:'default'
     }
 });
 

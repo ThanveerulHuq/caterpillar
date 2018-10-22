@@ -11,18 +11,15 @@ const response = require('./response.model')
  */
 function create(req, res, next) {
     let responseList = [];
-    for (i = 0; i < (req.body.answer).length; i++) {
+    
         const question = {
             survey: req.body.survey,
-            question: req.body.answer[i].question,
-            response: req.body.answer[i].response,
-            skipped: req.body.answer[i].skipped
+            answer: req.body.answer
 
         };
-        responseList.push(question);
-    }
+     
 
-    response.bulkInsert(responseList)
+    response.save(responseList)
         .then(savedResponse => res.json({ message: savedResponse ? 'questions updated successfully' : 'error updating questions' }))
         .catch(e => next(e));
 }
