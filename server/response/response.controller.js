@@ -12,16 +12,16 @@ const response = require('./response.model')
 function create(req, res, next) {
     let responseList = [];
     
-        const question = {
+        const response  = new response({
             survey: req.body.survey,
             answer: req.body.answer
 
-        };
+        });
      
 
-    response.save(responseList)
-        .then(savedResponse => res.json({ message: savedResponse ? 'questions updated successfully' : 'error updating questions' }))
-        .catch(e => next(e));
+    response.save()
+    .then(savedQuestion => res.json(savedQuestion))
+    .catch(e => next(e));
 }
 
 /**

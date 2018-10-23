@@ -12,8 +12,8 @@ const ResponseSchema = new mongoose.Schema({
         required: true
     },
     answer: {
-        type: [String],
-        required: false,
+        type: [[String]],
+        required: false 
     }
 });
 
