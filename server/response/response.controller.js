@@ -1,4 +1,4 @@
-const response = require('./response.model')
+const Response = require('./response.model')
 
 
 /**
@@ -7,7 +7,7 @@ const response = require('./response.model')
  * @property {string} req.body.question_no
  * @property {string} req.body.response 
  * @property {string} req.body.skipped
- * @returns {response}
+ * @returns {Response}
  */
 function create(req, res, next) {
     let responseList = [];

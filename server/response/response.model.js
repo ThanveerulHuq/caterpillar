@@ -11,10 +11,16 @@ const ResponseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    answer: {
-        type: [[String]],
+    answer: [{
+        type: String,
         required: false 
-    }
+    },{
+      type: String,
+      required: false 
+  },{
+    type: String,
+    required: false 
+}]
 });
 
 
