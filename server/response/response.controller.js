@@ -12,7 +12,7 @@ const Response = require('./response.model')
 function create(req, res, next) {
     let responseList = [];
     
-        const response  = new response({
+        const response  = new Response({
             survey: req.body.survey,
             answer: req.body.answer
 

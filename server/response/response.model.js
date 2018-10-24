@@ -6,21 +6,25 @@ const APIError = require('../helpers/APIError');
 
 const ResponseSchema = new mongoose.Schema({
 
-   
-    survey: {
-        type: String,
-        required: true
-    },
-    answer: [{
-        type: String,
-        required: false 
-    },{
-      type: String,
-      required: false 
-  },{
+
+  survey: {
     type: String,
-    required: false 
-}]
+    required: true
+  },
+  answer: [{
+    question: {
+      type: String,
+      required: false
+    },
+    response: {
+      type: String,
+      required: false
+    },
+    skipped: {
+      type: String,
+      required: false
+    }
+  }]
 });
 
 
@@ -63,8 +67,8 @@ ResponseSchema.statics = {
   },
 
 
-  bulkInsert(data){
-      return this.insertMany(data);
+  bulkInsert(data) {
+    return this.insertMany(data);
   }
 };
 
