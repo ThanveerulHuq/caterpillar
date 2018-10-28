@@ -17,7 +17,7 @@ const ResponseSchema = new mongoose.Schema({
       required: false
     },
     response: {
-      type: String,
+      type: [String],
       required: false
     },
     skipped: {
