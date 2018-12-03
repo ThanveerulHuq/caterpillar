@@ -11,7 +11,6 @@ const Survey= require('./survey.model')
  */
 function create(req, res, next) {
     
-    console.log('in survey controller');
     var today = new Date();
     var dateTime = formatDate(today);
 

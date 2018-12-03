@@ -18,9 +18,8 @@ function create(req, res, next) {
 
         });
      
-
     response.save()
-    .then(savedQuestion => res.json(savedQuestion))
+    .then(savedResponse =>res.json({message:'Your response submitted successfully'}) )
     .catch(e => next(e));
 }
 
