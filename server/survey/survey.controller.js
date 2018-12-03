@@ -18,7 +18,6 @@ function create(req, res, next) {
     var genId = tempGenId.replace(/\s/g, "");
     var genUrl = req.body.surveyName + "/" + req.body.theme +"/"+genId;
     const survey = new Survey({
-        _id: genId,
         surveyName: req.body.surveyName,
         description: req.body.description,
         theme: req.body.theme,
