@@ -1,8 +1,9 @@
 const questions = require('./questions.model')
+const survey = require('../survey/survey.model')
 
 
 /**
- * Create new user
+ * Create new question
  * @property {string} req.body.surveyName 
  * @property {string} req.body.description
  * @property {string} req.body.theme 
@@ -42,10 +43,30 @@ function list(req, res, next) {
         .catch(e => next(e));
 }
 
-function viewOne(req, res, next) {
-    questions.find({ survey: req.params.id }, questions)
-        .then(questions => res.json(questions))
+async function viewOne(req, res, next) {
+    let currentSurvey={};
+    await survey.findById(req.params.id,(err,doc)=>{
+        if(doc){
+            currentSurvey.survey=doc.surveyName;
+            currentSurvey.description=doc.description;
+        }else{
+            currentSurvey.message='no survey exist';
+        }
+    })
+    if(currentSurvey.survey){
+        questions.find({ survey: req.params.id }, questions)
+        .then(questions =>{ 
+            let surveyQuestions=[];
+            questions.forEach((el)=>{
+                surveyQuestions.push({order:el.question_no,optional:el.optional,options:el.options,type:el.type,title:el.title})
+            });
+            currentSurvey.questions=surveyQuestions;
+            res.json(currentSurvey)})
         .catch(e => next(e));
+    }else{
+        res.json(currentSurvey)
+    }
+    
 }
 
 module.exports = { create, list, viewOne };

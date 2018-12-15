@@ -48,7 +48,7 @@ SurveySchema.statics = {
         if (survey) {
           return survey;
         }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
+        const err = new APIError('No such survey exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       });
   },

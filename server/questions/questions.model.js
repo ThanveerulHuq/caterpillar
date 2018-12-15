@@ -47,13 +47,13 @@ QuestionsSchema.statics = {
    * @returns {Promise<Survey, APIError>}
    */
   get(id) {
-    return this.findById(id)
+    return this.findById(id).sort({ question_no: -1 })
       .exec()
       .then((questions) => {
         if (questions) {
           return questions;
         }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
+        const err = new APIError('No such survey exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       });
   },
